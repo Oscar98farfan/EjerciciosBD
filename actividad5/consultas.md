@@ -85,7 +85,7 @@ SELECT amount, payment_date FROM payment WHERE amount <1;
 
 ### Codigo
 ```sql
-
+SELECT DISTINCT last_update FROM rental;
 ```
 ### Evidencia
 ![Consulta 10](./consulta10.png)
@@ -130,7 +130,67 @@ SELECT COUNT(DISTINCT customer_id) FROM rental;
 
 ### Codigo
 ```sql
-
+SELECT last_name FROM customer GROUP BY last_name HAVING COUNT(*) > 1;
 ```
 ### Evidencia
 ![Consulta 15](./consulta15.png)
+
+> ## 16. ¿Qué película (id) tiene la mayor cantidad de actores?
+
+### Codigo
+```sql
+SELECT film_id, COUNT(actor_id) AS num_actors
+FROM film_actor
+GROUP BY film_id
+ORDER BY num_actors DESC
+LIMIT 1;
+```
+### Evidencia
+![Consulta 16](./consulta16.png)
+
+
+> ## 17. ¿Qué actor (id) aparece en la mayor cantidad de películas?
+
+### Codigo
+```sql
+SELECT actor_id, COUNT(film_id) AS num_films
+FROM film_actor
+GROUP BY actor_id
+ORDER BY num_films DESC
+LIMIT 1;
+```
+### Evidencia
+![Consulta 17](./consulta17.png)
+
+> ## 18. Cuenta el número de ciudades para cada country_id en la tabla city. Ordena los resultados por count(*).
+
+### Codigo
+```sql
+SELECT country_id, COUNT(*) AS num_ciudades
+FROM city
+GROUP BY country_id
+ORDER BY COUNT(*) DESC;
+```
+### Evidencia
+![Consulta 18](./consulta18.png)
+
+> ## 19. ¿Cuál es la tarifa de alquiler promedio de las películas? ¿Puedes redondear el resultado a 2 decimales?
+
+### Codigo
+```sql
+SELECT ROUND(AVG(rental_rate), 2) AS tarifa_promedio FROM film;
+```
+### Evidencia
+![Consulta 19](./consulta19.png)
+
+> ## 20. Selecciona los 10 actores que tienen los nombres más largos (nombre y apellido combinados).
+
+### Codigo
+```sql
+SELECT actor_id, CONCAT(first_name, ' ', last_name) AS nombre_completo
+FROM actor
+ORDER BY LENGTH(CONCAT(first_name, ' ', last_name)) DESC
+LIMIT 10;
+```
+### Evidencia
+![Consulta 20](./consulta20.png)

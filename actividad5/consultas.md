@@ -112,7 +112,8 @@ SELECT customer_id FROM rental ORDER BY return_date DESC LIMIT 3;
 
 ### Codigo
 ```sql
-SELECT COUNT(rating) FROM film WHERE rating='NC-17' OR rating='PG' OR rating='PG-13';
+SELECT rating, COUNT(rating) FROM film WHERE rating='NC-17' OR rating='PG' OR rating='PG-13' GROUP BY rating;
+--Un IN es similar a un OR
 ```
 ### Evidencia
 ![Consulta 13](./consulta13.png)
